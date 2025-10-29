@@ -11,7 +11,13 @@ function App() {
     setResult("");
 
     try {
-      const response = await fetch("/api/generate", {
+      // In production, use Render backend. In dev, use Vite proxy
+      const isProduction = import.meta.env.PROD;
+      const apiEndpoint = isProduction 
+        ? `${import.meta.env.VITE_API_URL || "https://reelforge-free.onrender.com"}/api/generate`
+        : "/api/generate"; // Vite proxy handles this
+      
+      const response = await fetch(apiEndpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ topic }),

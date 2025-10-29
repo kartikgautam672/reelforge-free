@@ -1,0 +1,26 @@
+services:
+  # Backend API Service
+  - type: web
+    name: reelforge-api
+    runtime: node
+    buildCommand: cd server && npm install
+    startCommand: cd server && npm start
+    envVars:
+      - key: OPENAI_API_KEY
+        sync: false
+    env:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+
+  # Frontend Static Site (optional - can use Netlify)
+  - type: web
+    name: reelforge-frontend
+    runtime: static
+    buildCommand: npm install && npm run build
+    staticPublishPath: ./dist
+    envVars:
+      - key: VITE_API_URL
+        value: https://reelforge-api.onrender.com
+
