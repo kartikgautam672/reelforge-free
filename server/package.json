@@ -4,6 +4,7 @@
   "description": "ReelForge API Server",
   "main": "server.js",
   "scripts": {
+    "build": "echo 'no build step for server'",
     "start": "node server.js",
     "dev": "node server.js"
   },
